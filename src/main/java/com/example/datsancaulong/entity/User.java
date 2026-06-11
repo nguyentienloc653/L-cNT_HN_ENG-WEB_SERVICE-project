@@ -9,8 +9,6 @@ import java.util.Set;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Data
 @Builder
 public class User {
@@ -31,5 +29,9 @@ public class User {
     )
     @JsonIgnore
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private java.util.List<Booking> bookings;
 
 }

@@ -24,7 +24,7 @@ public class UserServiceImp implements UserService {
     @Override
     public Page<User> getListUser(Integer currentPage, Integer pageSize, String keyword) {
         Sort sort = Sort.by("id");
-        Pageable pageable = PageRequest.of(currentPage, pageSize, sort);
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, sort);
         return userRepository.findAll(pageable);
     }
 
@@ -63,7 +63,7 @@ public class UserServiceImp implements UserService {
                 .roles(request.getRoles())
                 .enabled(true)
                 .build();
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
@@ -80,6 +80,6 @@ public class UserServiceImp implements UserService {
             user.setPhoneNumber(request.getPhoneNumber());
         }
 
-        return null;
+        return userRepository.save(user);
     }
 }

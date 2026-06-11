@@ -1,5 +1,6 @@
 package com.example.datsancaulong.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -25,5 +26,8 @@ public class Court {
     @JoinColumn(name = "cluster_id")
     private BadmintonCluser cluster;
 
+    @OneToMany(mappedBy = "court", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Booking> bookings;
 
 }

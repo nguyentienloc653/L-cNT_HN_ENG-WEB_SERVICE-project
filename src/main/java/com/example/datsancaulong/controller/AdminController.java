@@ -34,7 +34,7 @@ public class AdminController {
         ), HttpStatus.OK);
     }
 
-    @GetMapping("users/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<ApiDataResponse<UserProjectionDTO>> getUserById(@PathVariable Long id) {
         return new ResponseEntity<>(new ApiDataResponse<>(
                 true,
