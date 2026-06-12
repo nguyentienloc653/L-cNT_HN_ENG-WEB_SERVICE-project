@@ -82,4 +82,20 @@ public class UserServiceImp implements UserService {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public void changePassword(String oldPassword, String newPassword) {
+        org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !(auth.getPrincipal() instanceof com.example.datsancaulong.security.principal.CustomerUserDetails userDetails)) {
+            throw new com.example.datsancaulong.exception.UnauthorizedException("Người dùng chưa đăng nhập");
+        }
+
+        User user = findById(userDetails.getUser().getId());
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new com.example.datsancaulong.exception.BadRequestException("Mật khẩu cũ không đúng");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+    }
 }

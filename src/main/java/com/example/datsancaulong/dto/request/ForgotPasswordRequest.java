@@ -1,16 +1,19 @@
 package com.example.datsancaulong.dto.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Builder
-public class RefreshTokenRequest {
-    @NotBlank(message = "Refresh token không được để trống")
-    private String refreshToken;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ForgotPasswordRequest {
+    @Email
+    @NotBlank
+    private String email;
 }
+

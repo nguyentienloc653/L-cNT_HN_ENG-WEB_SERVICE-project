@@ -41,7 +41,7 @@ public class JwtService {
             Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token);
             return true;
         } catch (JwtException e) {
-            throw new RuntimeException(e);
+            throw new com.example.datsancaulong.exception.BadRequestException(e.getMessage());
         }
     }
 

@@ -1,6 +1,5 @@
-package com.example.datsancaulong.dto.request;
+package com.example.datsancaulong.dto.response;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class RefreshTokenRequest {
-    @NotBlank(message = "Refresh token không được để trống")
+public class JwtResponse {
+    private String accessToken;
     private String refreshToken;
 }

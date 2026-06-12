@@ -18,4 +18,5 @@ public interface UserService {
     User createUser(UserCreateRequest request);
 
     User updateUser(Long id, UserUpdateRequest request);
+    void changePassword(String oldPassword, String newPassword);
 }

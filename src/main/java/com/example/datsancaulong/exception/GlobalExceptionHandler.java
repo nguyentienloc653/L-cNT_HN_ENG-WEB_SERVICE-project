@@ -71,4 +71,48 @@ public class GlobalExceptionHandler {
                 HttpStatus.NOT_FOUND
         ), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiDataResponse<?>> handleBadRequest(BadRequestException exception) {
+        return new ResponseEntity<>(new ApiDataResponse<>(
+                false,
+                exception.getMessage(),
+                null,
+                null,
+                HttpStatus.BAD_REQUEST
+        ), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ApiDataResponse<?>> handleUnauthorized(UnauthorizedException exception) {
+        return new ResponseEntity<>(new ApiDataResponse<>(
+                false,
+                exception.getMessage(),
+                null,
+                null,
+                HttpStatus.UNAUTHORIZED
+        ), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(InternalServerException.class)
+    public ResponseEntity<ApiDataResponse<?>> handleInternalServer(InternalServerException exception) {
+        return new ResponseEntity<>(new ApiDataResponse<>(
+                false,
+                exception.getMessage(),
+                null,
+                null,
+                HttpStatus.INTERNAL_SERVER_ERROR
+        ), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiDataResponse<?>> handleAll(Exception exception) {
+        return new ResponseEntity<>(new ApiDataResponse<>(
+                false,
+                exception.getMessage(),
+                null,
+                null,
+                HttpStatus.INTERNAL_SERVER_ERROR
+        ), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

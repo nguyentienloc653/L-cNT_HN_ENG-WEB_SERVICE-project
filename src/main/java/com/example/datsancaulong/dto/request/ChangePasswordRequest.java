@@ -6,11 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Builder
-public class RefreshTokenRequest {
-    @NotBlank(message = "Refresh token không được để trống")
-    private String refreshToken;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChangePasswordRequest {
+    @NotBlank
+    private String oldPassword;
+
+    @NotBlank
+    private String newPassword;
 }
+

@@ -5,7 +5,9 @@ import com.example.datsancaulong.dto.request.UserUpdateRequest;
 import com.example.datsancaulong.dto.response.ApiDataResponse;
 import com.example.datsancaulong.dto.response.UserProjectionDTO;
 import com.example.datsancaulong.entity.User;
+import com.example.datsancaulong.entity.Booking;
 import com.example.datsancaulong.service.UserService;
+import com.example.datsancaulong.service.BookingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/admin")
 public class AdminController {
     private final UserService userService;
+    private final BookingService bookingService;
 
     @GetMapping("/users")
     public ResponseEntity<ApiDataResponse<Page<User>>> getListUser(
@@ -65,6 +68,18 @@ public class AdminController {
                 null,
                 HttpStatus.OK
         ), HttpStatus.OK);
+    }
+
+    @PatchMapping("/bookings/{id}/approve")
+    public ResponseEntity<ApiDataResponse<Booking>> approveBooking(@PathVariable Long id) {
+        Booking booking = bookingService.approveBooking(id);
+        return new ResponseEntity<>(new ApiDataResponse<>(true, "Duyệt lịch thành công", booking, null, HttpStatus.OK), HttpStatus.OK);
+    }
+
+    @PatchMapping("/bookings/{id}/reject")
+    public ResponseEntity<ApiDataResponse<Booking>> rejectBooking(@PathVariable Long id) {
+        Booking booking = bookingService.rejectBooking(id);
+        return new ResponseEntity<>(new ApiDataResponse<>(true, "Từ chối lịch thành công", booking, null, HttpStatus.OK), HttpStatus.OK);
     }
 
 }

@@ -24,4 +24,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             @Param("endTime") LocalDateTime endTime,
             @Param("status") BookingStatus status
     );
+
+    org.springframework.data.domain.Page<Booking> findByUserId(Long userId, org.springframework.data.domain.Pageable pageable);
+
 }

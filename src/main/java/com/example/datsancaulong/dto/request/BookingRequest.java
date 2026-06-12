@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 public class BookingRequest {
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startTime;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endTime;
+    private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd'")
+    private LocalDateTime endTime;
 }

@@ -1,7 +1,7 @@
 package com.example.datsancaulong.security.jwt;
 
 import com.example.datsancaulong.security.principal.CustomerUserDetails;
-import com.example.datsancaulong.security.principal.CustomerUserDetailsService;
+import com.example.datsancaulong.security.principal.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,14 +19,14 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter{
     private final JwtService jwtService;
-    private final CustomerUserDetailsService customerUserDetailsService;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = getTokenFromRequest(request);
         if (token != null && jwtService.verifyToken(token)) {
             String username = jwtService.getUsernameFromToken(token);
-            CustomerUserDetails customerUserDetails = (CustomerUserDetails) customerUserDetailsService.loadUserByUsername(username);
+            CustomerUserDetails customerUserDetails = (CustomerUserDetails) customUserDetailsService.loadUserByUsername(username);
             Authentication authentication = new UsernamePasswordAuthenticationToken(customerUserDetails, null, customerUserDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
